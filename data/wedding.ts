@@ -2,14 +2,16 @@ export const wedding = {
   bride: "Nguyễn Minh Anh",
   groom: "Nguyễn Văn Tiến",
   dateLabel: "Thứ Hai, 21 tháng 09 năm 2026",
+  dateShort: "21.09.2026",
+  lunarDate: "Ngày 11 tháng 08 năm Bính Ngọ",
   ceremonyTime: "09:30",
   partyTime: "10:30",
   countdownTarget: "2026-09-21T09:30:00+07:00",
   invitation:
     "Trân trọng kính mời quý khách tới dự lễ thành hôn của hai chúng tôi.",
   families: {
-    bride: "Nhà gái: Ông, Bà Nguyễn Thế Mai & Phạm Thị Hồng",
-    groom: "Nhà trai: Bà Mai Thị Hường",
+    bride: "Ông, Bà Nguyễn Thế Mai & Phạm Thị Hồng",
+    groom: "Bà Mai Thị Hường",
   },
   events: [
     {
@@ -17,21 +19,21 @@ export const wedding = {
       time: "08:00",
       date: "19.09.2026",
       address: "Tại gia đình nhà gái",
-      note: "Thứ Bảy, là ngày 09 tháng 08 năm Bính Ngọ",
+      note: "Thứ Bảy, ngày 09 tháng 08 năm Bính Ngọ",
     },
     {
       title: "Bữa cơm thân mật",
       time: "10:30",
       date: "19.09.2026",
       address: "Nhà khách Z111, Số 84 Bà Triệu, P. Hàm Rồng, tỉnh Thanh Hóa",
-      note: "Thứ Bảy, là ngày 09 tháng 08 năm Bính Ngọ",
+      note: "Thứ Bảy, ngày 09 tháng 08 năm Bính Ngọ",
     },
     {
       title: "Hôn lễ",
       time: "09:30",
       date: "21.09.2026",
       address: "Tại tư gia nhà trai",
-      note: "Thứ Hai, là ngày 11 tháng 08 năm Bính Ngọ",
+      note: "Thứ Hai, ngày 11 tháng 08 năm Bính Ngọ",
     },
   ],
   gallery: [

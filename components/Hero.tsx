@@ -2,48 +2,80 @@ import { wedding } from "../data/wedding";
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-[92svh] items-center overflow-hidden bg-[#fff4e8] px-5 py-14">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_20%,rgba(216,125,96,0.22),transparent_32%),radial-gradient(circle_at_88%_12%,rgba(91,126,122,0.2),transparent_28%),linear-gradient(135deg,#fffaf5_0%,#f5e4d4_52%,#e9f0ec_100%)]" />
-      <div className="relative mx-auto grid w-full max-w-6xl gap-10 md:grid-cols-[1.05fr_0.95fr] md:items-center">
-        <div className="space-y-7">
-          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#7a6a42]">
-            Save the date
+    <section className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-[#4a1212] px-4 py-10 text-[#ffe9b3] sm:px-6 sm:py-14 lg:py-20">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_14%,rgba(255,216,118,0.18),transparent_26%),radial-gradient(circle_at_84%_78%,rgba(255,96,72,0.16),transparent_30%),linear-gradient(135deg,#5a1515_0%,#320909_56%,#210505_100%)]" />
+      <div
+        aria-hidden="true"
+        className="absolute left-3 top-4 text-4xl text-[#f4c65c]/25 sm:left-6 sm:text-7xl"
+      >
+        {"\u56CD"}
+      </div>
+      <div
+        aria-hidden="true"
+        className="absolute bottom-5 right-4 text-5xl text-[#f4c65c]/20 sm:right-6 sm:text-8xl"
+      >
+        {"\u56CD"}
+      </div>
+
+      <div className="relative mx-auto grid w-full max-w-6xl gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
+        <div className="space-y-6 text-center lg:text-left">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#f4c65c] sm:text-sm sm:tracking-[0.22em]">
+            Song Long Đỏ
           </p>
           <div className="space-y-4">
-            <h1 className="text-5xl font-semibold leading-tight text-[#36251f] sm:text-6xl lg:text-7xl">
-              {wedding.bride}
-              <span className="block text-[#a6533f]">&</span>
-              {wedding.groom}
+            <h1 className="font-display text-4xl font-semibold leading-[1.08] text-[#fff4ce] sm:text-5xl lg:text-6xl">
+              <span className="block break-words">{wedding.groom}</span>
+              <span className="mx-auto my-3 block h-px w-24 bg-[#f4c65c] sm:w-28 lg:mx-0" />
+              <span className="block break-words">{wedding.bride}</span>
             </h1>
-            <p className="max-w-xl text-lg leading-8 text-[#62514a]">
+            <p className="mx-auto max-w-xl text-base leading-7 text-[#f7ddb0] sm:text-lg sm:leading-8 lg:mx-0">
               {wedding.invitation}
             </p>
           </div>
-          <div className="flex flex-wrap gap-3">
+          <div className="grid gap-3 sm:flex sm:flex-wrap sm:justify-center lg:justify-start">
             <a
               href="#rsvp"
-              className="rounded-full bg-[#2f5f58] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#284f4a]"
+              className="inline-flex min-h-11 items-center justify-center rounded-full bg-[#f4c65c] px-5 py-3 text-sm font-semibold text-[#4a1212] shadow-sm transition hover:bg-[#ffe08a]"
             >
               Xác nhận tham dự
             </a>
             <a
               href="#location"
-              className="rounded-full border border-[#2f5f58]/30 bg-white/65 px-6 py-3 text-sm font-semibold text-[#2f5f58] backdrop-blur transition hover:bg-white"
+              className="inline-flex min-h-11 items-center justify-center rounded-full border border-[#f4c65c]/50 bg-white/5 px-5 py-3 text-sm font-semibold text-[#ffe9b3] backdrop-blur transition hover:bg-white/10"
             >
               Xem địa điểm
             </a>
           </div>
         </div>
-        <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-t-full border border-white/70 bg-[#f8dcc7] p-4 shadow-2xl shadow-[#8b6040]/15">
-          <div className="flex h-full items-center justify-center rounded-t-full bg-[linear-gradient(160deg,#f8c9b3,#fff7ee_52%,#bfd4ce)] text-center">
-            <div className="space-y-4 px-6">
-              <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[#7b5d4e]">
-                Wedding Day
+
+        <div className="mx-auto w-full max-w-[17rem] sm:max-w-xs lg:max-w-sm">
+          <div className="relative aspect-[4/5] overflow-hidden rounded-t-[10rem] border border-[#f4c65c]/60 bg-[#741717] p-3 shadow-2xl shadow-black/30 sm:rounded-t-[12rem] sm:p-4">
+            <div className="absolute inset-4 rounded-t-[9rem] border border-[#f8d777]/50 sm:inset-5 sm:rounded-t-[10rem]" />
+            <div className="flex h-full flex-col items-center justify-between rounded-t-[9rem] bg-[linear-gradient(160deg,#8b1b1b_0%,#5a1010_52%,#340909_100%)] px-5 py-7 text-center sm:rounded-t-[10rem] sm:px-7 sm:py-10">
+              <div
+                aria-hidden="true"
+                className="grid w-full grid-cols-2 text-4xl font-semibold text-[#f4c65c]/75 sm:text-6xl"
+              >
+                <span>{"\u9F8D"}</span>
+                <span className="-scale-x-100">{"\u9F8D"}</span>
+              </div>
+              <div>
+                <p className="text-5xl leading-none text-[#f4c65c] sm:text-7xl">
+                  {"\u56CD"}
+                </p>
+                <p className="mt-5 text-xs font-semibold uppercase tracking-[0.2em] text-[#f6d484] sm:mt-6 sm:text-sm sm:tracking-[0.24em]">
+                  Wedding Day
+                </p>
+                <p className="mt-3 text-3xl font-semibold text-[#fff4ce] sm:text-4xl">
+                  {wedding.dateShort}
+                </p>
+                <p className="mt-3 text-sm text-[#f7ddb0] sm:text-base">
+                  Bắt đầu lúc {wedding.partyTime}
+                </p>
+              </div>
+              <p className="max-w-48 text-xs leading-5 text-[#f6d484] sm:max-w-none sm:text-sm">
+                {wedding.lunarDate}
               </p>
-              <p className="text-4xl font-semibold text-[#34241e]">
-                {wedding.dateLabel}
-              </p>
-              <p className="text-base text-[#705c53]">Bắt đầu lúc {wedding.partyTime}</p>
             </div>
           </div>
         </div>

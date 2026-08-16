@@ -45,17 +45,21 @@ export function Countdown() {
   );
 
   return (
-    <section className="bg-[#2f5f58] px-5 py-16 text-white">
-      <div className="mx-auto max-w-5xl text-center">
-        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#f7d7c2]">
+    <section className="bg-[#fff7e6] px-4 py-12 sm:px-6 sm:py-16">
+      <div className="mx-auto max-w-5xl border-y border-[#e1b85c] py-8 text-center sm:py-10">
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#9b1c1c] sm:text-sm sm:tracking-[0.2em]">
           Countdown
         </p>
-        <h2 className="mt-3 text-3xl font-semibold">Đếm ngược đến ngày vui</h2>
-        <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <h2 className="mt-3 text-2xl font-semibold leading-tight text-[#4a1212] sm:text-3xl">
+          Đếm ngược đến ngày vui
+        </h2>
+        <div className="mt-7 grid grid-cols-2 gap-2 sm:mt-8 sm:grid-cols-4 sm:gap-3">
           {items.map(([label, value]) => (
-            <div key={label} className="rounded-lg bg-white/12 p-5 backdrop-blur">
-              <p className="text-4xl font-semibold tabular-nums">{value}</p>
-              <p className="mt-2 text-sm text-[#f8e9df]">{label}</p>
+            <div key={label} className="min-w-0 bg-[#4a1212] p-4 text-[#fff4ce] sm:p-5">
+              <p className="text-3xl font-semibold tabular-nums text-[#f4c65c] sm:text-4xl">
+                {value}
+              </p>
+              <p className="mt-2 text-sm">{label}</p>
             </div>
           ))}
         </div>

@@ -1,0 +1,14 @@
+
+> wedding-invitation@0.2.0 dev
+> next dev -p 3000
+
+   ▲ Next.js 15.5.21
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.0.13:3000
+
+ ✓ Starting...
+ ✓ Ready in 3.3s
+ ○ Compiling / ...
+ ✓ Compiled / in 8.2s (555 modules)
+ GET / 200 in 9481ms
+ GET / 200 in 417ms
