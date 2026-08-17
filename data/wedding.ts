@@ -1,6 +1,6 @@
 export const wedding = {
-  bride: "Nguyễn Minh Anh",
-  groom: "Nguyễn Văn Tiến",
+  bride: "Minh Anh",
+  groom: "Văn Tiến",
   dateLabel: "Thứ Hai, 21 tháng 09 năm 2026",
   dateShort: "21.09.2026",
   lunarDate: "Ngày 11 tháng 08 năm Bính Ngọ",
@@ -44,7 +44,7 @@ export const wedding = {
   ],
   location: {
     name: "Nhà khách Z111",
-    address: "Số 84 Bà Triệu, P. Hàm Rồng, tỉnh Thanh Hóa",
+    address: "Số 284 Bà Triệu, P. Hàm Rồng, tỉnh Thanh Hóa",
     mapUrl: "https://maps.google.com/?q=84+Ba+Trieu+Ham+Rong+Thanh+Hoa",
   },
   addresses: {
