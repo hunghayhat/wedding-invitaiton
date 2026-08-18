@@ -1,5 +1,6 @@
 import { Countdown } from "../components/Countdown";
 import { Gallery } from "../components/Gallery";
+import { Gift } from "../components/Gift";
 import { Hero } from "../components/Hero";
 import { Invitation } from "../components/Invitation";
 import { RsvpPlaceholder } from "../components/RsvpPlaceholder";
@@ -13,6 +14,7 @@ export default function Home() {
       <Invitation />
       <Countdown />
       <Gallery />
+      <Gift />
       <RsvpPlaceholder />
     </main>
   );

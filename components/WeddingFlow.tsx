@@ -26,7 +26,7 @@ export function WeddingFlow() {
             <h2 className="mt-3 text-2xl font-semibold leading-tight sm:text-3xl">
               Chọn thông tin theo bên mời
             </h2>
-            <div className="mt-6 grid grid-cols-3 border border-[#d7a84f] bg-white/70 p-1">
+            <div className="mx-auto mt-6 grid max-w-md grid-cols-3 rounded-md border border-[#e4cfaf] bg-white/80 p-1 shadow-sm">
               {filters.map((filter) => {
                 const isActive = selectedSide === filter.value;
 
@@ -36,9 +36,9 @@ export function WeddingFlow() {
                     type="button"
                     aria-pressed={isActive}
                     onClick={() => setSelectedSide(filter.value)}
-                    className={`min-h-11 px-3 py-2 text-sm font-semibold transition ${
+                    className={`min-h-11 rounded-[4px] px-3 py-2 text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#982723]/30 ${
                       isActive
-                        ? "bg-[#982723] text-white"
+                        ? "bg-[#982723] text-white shadow-sm"
                         : "text-[#6b4435] hover:bg-[#f6ead6]"
                     }`}
                   >

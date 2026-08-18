@@ -8,13 +8,14 @@
     "optimize:gallery": "node scripts/optimize-gallery.mjs",
     "start": "next start",
     "optimize:portraits": "node scripts/optimize-portraits.mjs",
-    "lint": "next lint"
+    "lint": "tsc --noEmit"
   },
   "engines": {
-    "node": ">=18.8.0"
+    "node": ">=20.9.0"
   },
   "dependencies": {
-    "next": "^15.5.21",
+    "google-auth-library": "^11.0.2",
+    "next": "^16.3.1",
     "react": "^19.2.8",
     "react-dom": "^19.2.8"
   },

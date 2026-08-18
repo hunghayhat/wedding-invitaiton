@@ -3,13 +3,13 @@ node_modules
 out
 dist
 assets/originals/
+*.tsbuildinfo
 .env*
 !.env.example
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+.next-dev*.log
 .DS_Store
-
 .vercel
-.env*

@@ -1,6 +1,8 @@
-# Thiệp cưới online
+# Thiệp cưới Minh Anh & Văn Tiến
 
-Project thiệp cưới online dùng Next.js, TypeScript và Tailwind CSS. Bản đầu tiên chỉ có giao diện tĩnh, dữ liệu mẫu và RSVP placeholder. Chưa có backend, Supabase hoặc secret.
+Thiệp cưới online dùng Next.js, TypeScript và Tailwind CSS. Website gồm lịch
+cưới, địa điểm, album, mã QR mừng cưới và form xác nhận tham dự lưu trực tiếp
+vào Google Sheets.
 
 ## Chạy local
 
@@ -17,7 +19,7 @@ Sau đó mở địa chỉ được hiển thị trong terminal, thường là:
 http://localhost:3000
 ```
 
-## Thay nội dung
+## Nội dung và hình ảnh
 
 Các thông tin mẫu nằm ở:
 
@@ -25,11 +27,17 @@ Các thông tin mẫu nằm ở:
 data/wedding.ts
 ```
 
-Có thể thay tên cô dâu, chú rể, ngày cưới, lịch trình, địa điểm và nội dung gallery tại đó.
+Có thể thay tên cô dâu, chú rể, lịch trình, địa điểm, gallery và thông tin mừng
+cưới tại đó. Ảnh đang dùng nằm trong `public/`.
 
-## Ghi chú bảo mật
+## Google Sheets
 
-- Không có secret trong project.
-- Không có kết nối Supabase ở bước này.
-- RSVP hiện chỉ là placeholder, chưa gửi dữ liệu đi đâu.
-- Khi thêm RSVP thật, nên dùng API route/server-side validation trước khi lưu dữ liệu.
+Xem hướng dẫn tại `docs/google-sheets-api.md`. Các khóa chỉ được lưu trong
+`.env.local` hoặc Environment Variables của Vercel, không commit vào Git.
+
+## Kiểm tra trước khi deploy
+
+```bash
+npm run lint
+npm run build
+```
