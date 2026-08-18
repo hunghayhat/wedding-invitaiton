@@ -1,45 +1,40 @@
 import { wedding } from "../data/wedding";
 
-export function WeddingInfo() {
+type SelectedSide = "all" | "groom" | "bride";
+
+export function WeddingInfo({
+  selectedSide = "all",
+}: {
+  selectedSide?: SelectedSide;
+}) {
+  const events = wedding.events.filter(
+    (event) => selectedSide === "all" || event.side === selectedSide,
+  );
+
   return (
-    <section className="bg-[#5a1010] px-4 py-12 text-[#fff4ce] sm:px-6 sm:py-16">
-      <div className="mx-auto max-w-5xl">
-        <div className="mb-8 text-center sm:mb-10">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#f4c65c] sm:text-sm sm:tracking-[0.2em]">
-            Lịch trình
+    <div className="flex flex-wrap justify-center gap-4">
+      {events.map((event) => (
+        <article
+          key={`${event.side}-${event.title}`}
+          className="w-full min-w-0 border border-[#d7a84f] bg-white/70 p-5 text-center shadow-sm sm:w-[calc(50%-0.5rem)] sm:p-6 xl:w-[calc(25%-0.75rem)]"
+        >
+          <h3 className="flex min-h-14 items-center justify-center text-lg font-semibold uppercase tracking-[0.08em] text-[#982723]">
+            {event.title}
+          </h3>
+          <p className="font-display mt-4 text-4xl font-semibold tabular-nums text-[#982723]">
+            {event.time}
           </p>
-          <h2 className="mt-3 text-2xl font-semibold leading-tight sm:text-3xl lg:text-4xl">
-            Thông tin buổi lễ
-          </h2>
-        </div>
-        <div className="relative grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {wedding.events.map((event, index) => (
-            <article
-              key={event.title}
-              className="min-w-0 border border-[#f4c65c]/45 bg-[#3d0b0b]/55 p-5 shadow-lg shadow-black/10 sm:p-6"
-            >
-              <div className="flex items-center justify-between gap-4">
-                <p className="text-2xl font-semibold tabular-nums text-[#f4c65c] sm:text-3xl">
-                  {event.time}
-                </p>
-                <span className="flex size-9 items-center justify-center rounded-full border border-[#f4c65c]/60 text-sm text-[#f4c65c]">
-                  {index + 1}
-                </span>
-              </div>
-              <p className="mt-4 text-xs font-semibold uppercase tracking-[0.14em] text-[#f6d484] sm:text-sm sm:tracking-[0.16em]">
-                {event.date}
-              </p>
-              <h3 className="mt-3 text-xl font-semibold leading-7 text-white sm:text-2xl">
-                {event.title}
-              </h3>
-              <p className="mt-3 text-sm leading-6 text-[#f7ddb0]">
-                {event.note}
-              </p>
-              <p className="mt-4 leading-7 text-[#fff4ce]">{event.address}</p>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
+          <p className="mt-2 text-base font-semibold text-[#4a1212]">
+            {event.date}
+          </p>
+          <p className="mt-3 text-sm leading-6 text-[#80685a]">
+            {event.note}
+          </p>
+          <p className="mt-4 leading-7 text-[#5f4034]">
+            Tại {event.venue}
+          </p>
+        </article>
+      ))}
+    </div>
   );
 }

@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "optimize:gallery": "node scripts/optimize-gallery.mjs",
     "start": "next start",
+    "optimize:portraits": "node scripts/optimize-portraits.mjs",
     "lint": "next lint"
   },
   "engines": {

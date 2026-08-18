@@ -1,84 +1,93 @@
 import { wedding } from "../data/wedding";
 
+type Person = {
+  role?: string;
+  name: string;
+  photo: string;
+};
+
+function DragonPattern({ className = "" }: { className?: string }) {
+  return (
+    <div
+      aria-hidden="true"
+      className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`}
+    >
+      <div className="flex -translate-y-10 flex-wrap gap-x-10 gap-y-1 text-8xl font-semibold leading-none text-[#d59a49]/45 sm:text-9xl">
+        {Array.from({ length: 18 }).map((_, index) => (
+          <span
+            key={index}
+            className={index % 2 === 0 ? "rotate-12" : "-rotate-12"}
+          >
+            {"\u9F8D"}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function PortraitCard({ person }: { person: Person }) {
+  return (
+    <article className="relative z-10 min-w-0 text-center">
+      <div className="mx-auto size-[clamp(8.75rem,34vw,18rem)] overflow-hidden rounded-full border-[8px] border-[#efe3d7] bg-[#8f2622] shadow-xl shadow-[#5e1714]/20 sm:border-[10px]">
+        <img
+          src={person.photo}
+          alt={person.name}
+          className="h-full w-full object-cover"
+        />
+      </div>
+      {person.role ? (
+        <p className="mt-6 text-sm font-medium text-[#6f5b50] sm:text-base">
+          {person.role}
+        </p>
+      ) : null}
+      <h1
+        className={`font-display break-words text-3xl font-semibold leading-tight text-[#982723] sm:text-4xl lg:text-5xl ${
+          person.role ? "mt-1" : "mt-6"
+        }`}
+      >
+        {person.name}
+      </h1>
+    </article>
+  );
+}
+
 export function Hero() {
   return (
-    <section className="relative isolate flex min-h-[100svh] items-center overflow-hidden bg-[#4a1212] px-4 py-10 text-[#ffe9b3] sm:px-6 sm:py-14 lg:py-20">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_14%,rgba(255,216,118,0.18),transparent_26%),radial-gradient(circle_at_84%_78%,rgba(255,96,72,0.16),transparent_30%),linear-gradient(135deg,#5a1515_0%,#320909_56%,#210505_100%)]" />
-      <div
-        aria-hidden="true"
-        className="absolute left-3 top-4 text-4xl text-[#f4c65c]/25 sm:left-6 sm:text-7xl"
-      >
-        {"\u56CD"}
-      </div>
-      <div
-        aria-hidden="true"
-        className="absolute bottom-5 right-4 text-5xl text-[#f4c65c]/20 sm:right-6 sm:text-8xl"
-      >
-        {"\u56CD"}
+    <section className="overflow-hidden bg-[#efe3d7] text-[#982723]">
+      <div className="relative h-24 overflow-hidden bg-[#982723] sm:h-36">
+        <DragonPattern />
       </div>
 
-      <div className="relative mx-auto grid w-full max-w-6xl gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
-        <div className="space-y-6 text-center lg:text-left">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#f4c65c] sm:text-sm sm:tracking-[0.22em]">
-            Song Long Đỏ
-          </p>
-          <div className="space-y-4">
-            <h1 className="font-display text-4xl font-semibold leading-[1.08] text-[#fff4ce] sm:text-5xl lg:text-6xl">
-              <span className="block break-words">{wedding.groom}</span>
-              <span className="mx-auto my-3 block h-px w-24 bg-[#f4c65c] sm:w-28 lg:mx-0" />
-              <span className="block break-words">{wedding.bride}</span>
-            </h1>
-            <p className="mx-auto max-w-xl text-base leading-7 text-[#f7ddb0] sm:text-lg sm:leading-8 lg:mx-0">
-              {wedding.invitation}
-            </p>
-          </div>
-          <div className="grid gap-3 sm:flex sm:flex-wrap sm:justify-center lg:justify-start">
-            <a
-              href="#rsvp"
-              className="inline-flex min-h-11 items-center justify-center rounded-full bg-[#f4c65c] px-5 py-3 text-sm font-semibold text-[#4a1212] shadow-sm transition hover:bg-[#ffe08a]"
-            >
-              Xác nhận tham dự
-            </a>
-            <a
-              href="#location"
-              className="inline-flex min-h-11 items-center justify-center rounded-full border border-[#f4c65c]/50 bg-white/5 px-5 py-3 text-sm font-semibold text-[#ffe9b3] backdrop-blur transition hover:bg-white/10"
-            >
-              Xem địa điểm
-            </a>
-          </div>
-        </div>
+      <div className="relative overflow-hidden bg-[#efe3d7]">
+        <DragonPattern className="opacity-15" />
+        <div className="absolute inset-x-0 top-[34%] h-14 bg-[#982723] sm:top-[35%] sm:h-20" />
+        <div className="absolute inset-x-0 top-[34%] h-14 bg-[radial-gradient(circle_at_center,rgba(238,227,215,0.14),transparent_40%)] sm:top-[35%] sm:h-20" />
 
-        <div className="mx-auto w-full max-w-[17rem] sm:max-w-xs lg:max-w-sm">
-          <div className="relative aspect-[4/5] overflow-hidden rounded-t-[10rem] border border-[#f4c65c]/60 bg-[#741717] p-3 shadow-2xl shadow-black/30 sm:rounded-t-[12rem] sm:p-4">
-            <div className="absolute inset-4 rounded-t-[9rem] border border-[#f8d777]/50 sm:inset-5 sm:rounded-t-[10rem]" />
-            <div className="flex h-full flex-col items-center justify-between rounded-t-[9rem] bg-[linear-gradient(160deg,#8b1b1b_0%,#5a1010_52%,#340909_100%)] px-5 py-7 text-center sm:rounded-t-[10rem] sm:px-7 sm:py-10">
-              <div
-                aria-hidden="true"
-                className="grid w-full grid-cols-2 text-4xl font-semibold text-[#f4c65c]/75 sm:text-6xl"
-              >
-                <span>{"\u9F8D"}</span>
-                <span className="-scale-x-100">{"\u9F8D"}</span>
-              </div>
-              <div>
-                <p className="text-5xl leading-none text-[#f4c65c] sm:text-7xl">
-                  {"\u56CD"}
-                </p>
-                <p className="mt-5 text-xs font-semibold uppercase tracking-[0.2em] text-[#f6d484] sm:mt-6 sm:text-sm sm:tracking-[0.24em]">
-                  Wedding Day
-                </p>
-                <p className="mt-3 text-3xl font-semibold text-[#fff4ce] sm:text-4xl">
-                  {wedding.dateShort}
-                </p>
-                <p className="mt-3 text-sm text-[#f7ddb0] sm:text-base">
-                  Bắt đầu lúc {wedding.partyTime}
-                </p>
-              </div>
-              <p className="max-w-48 text-xs leading-5 text-[#f6d484] sm:max-w-none sm:text-sm">
-                {wedding.lunarDate}
-              </p>
+        <div className="relative mx-auto max-w-6xl px-4 pb-12 pt-10 sm:px-6 sm:pb-16 sm:pt-14 lg:pb-20">
+          <div className="relative grid grid-cols-2 items-start gap-4 sm:gap-10 lg:gap-16">
+            <PortraitCard person={wedding.people.groom} />
+
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute left-1/2 top-[clamp(4.7rem,18vw,9.8rem)] z-20 -translate-x-1/2 -translate-y-1/2 text-6xl font-bold leading-none text-[#982723] sm:text-7xl lg:text-8xl"
+              style={{
+                textShadow:
+                  "2px 0 #fff7ef, -2px 0 #fff7ef, 0 2px #fff7ef, 0 -2px #fff7ef",
+              }}
+            >
+              {"\u56CD"}
             </div>
+
+            <PortraitCard person={wedding.people.bride} />
           </div>
         </div>
+      </div>
+
+      <div className="bg-[#982723] px-4 py-5 text-center text-[#fff7ef] sm:py-6">
+        <h2 className="font-display text-2xl font-semibold uppercase leading-tight sm:text-3xl">
+          Thông tin lễ cưới
+        </h2>
       </div>
     </section>
   );
