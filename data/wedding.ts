@@ -2,6 +2,11 @@
   bride: "Minh Anh",
   groom: "Văn Tiến",
   countdownTarget: "2026-09-21T09:30:00+07:00",
+  hero: {
+    kicker: "Trân trọng kính mời",
+    title: "Lễ thành hôn",
+    dateLabel: "21.09.2026",
+  },
   people: {
     groom: {
       role: "Chú Rể",
@@ -15,8 +20,14 @@
     },
   },
   families: {
-    bride: "Ông, Bà Nguyễn Thế Mai & Phạm Thị Hồng",
-    groom: "Bà Mai Thị Hương",
+    bride: {
+      title: "Ông, Bà",
+      names: ["Nguyễn Thế Mai", "Phạm Thị Hồng"],
+    },
+    groom: {
+      title: "Bà",
+      names: ["Mai Thị Hương"],
+    },
   },
   events: [
     {
@@ -38,7 +49,6 @@
     {
       side: "groom",
       title: "Bữa cơm thân mật nhà trai",
-      time: "10:30",
       date: "20.09.2026",
       venue: "Gia đình nhà trai",
       note: "Chủ Nhật, ngày 10 tháng 08 năm Bính Ngọ",
@@ -53,11 +63,12 @@
     },
   ],
   gallery: [
-    "/images/gallery/1.webp",
+    "/images/gallery/5.webp",
     "/images/gallery/2.webp",
+    "/images/gallery/1.webp",
+    "/images/gallery/6.webp",
     "/images/gallery/3.webp",
     "/images/gallery/4.webp",
-    "/images/gallery/5.webp",
   ],
   locations: [
     {
@@ -99,11 +110,17 @@
       title: "Mừng cưới nhà trai",
       family: "Gia đình nhà trai",
       qrImage: "/qr/groom/groom-cropped.png",
+      bankName: "MB Bank",
+      accountNumber: "233336866666",
+      accountName: "Nguyễn Văn Tiến",
     },
     bride: {
       title: "Mừng cưới nhà gái",
       family: "Gia đình nhà gái",
       qrImage: "/qr/bride/bride-cropped.png",
+      bankName: "Vietcombank",
+      accountNumber: "9325990707",
+      accountName: "Nguyễn Minh Anh",
     },
   },
 };

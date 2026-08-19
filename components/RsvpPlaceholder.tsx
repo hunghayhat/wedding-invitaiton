@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { Reveal } from "./Reveal";
 
 type SubmitState = "idle" | "submitting" | "success" | "error";
 type AttendingStatus = "yes" | "maybe" | "no";
@@ -166,7 +167,7 @@ export function RsvpPlaceholder() {
 
   return (
     <section id="rsvp" className="bg-[#fff7e6] px-4 py-12 sm:px-6 sm:py-16">
-      <div className="mx-auto max-w-3xl rounded-md border border-[#ead9c5] bg-white/95 p-5 shadow-[0_18px_50px_rgba(74,18,18,0.08)] sm:p-8 lg:p-10">
+      <Reveal className="mx-auto max-w-3xl rounded-xl border border-[#ead9c5] bg-white/95 p-5 shadow-[0_18px_50px_rgba(74,18,18,0.08)] sm:p-6">
         <div className="max-w-2xl">
           <p className="text-xs font-semibold uppercase text-[#a2332e] sm:text-sm">
             Phản hồi lời mời
@@ -213,7 +214,7 @@ export function RsvpPlaceholder() {
             <legend className="mb-2 text-sm font-semibold text-[#4a1212]">
               Bạn là khách của
             </legend>
-            <div className="grid gap-2.5 sm:grid-cols-3">
+            <div className="grid gap-2.5 @2xl:grid-cols-3">
               {guestSides.map((side) => (
                 <RadioOption
                   key={side.value}
@@ -231,7 +232,7 @@ export function RsvpPlaceholder() {
             <legend className="mb-2 text-sm font-semibold text-[#4a1212]">
               Bạn có tham dự không?
             </legend>
-            <div className="grid gap-2.5 sm:grid-cols-3">
+            <div className="grid gap-2.5 @2xl:grid-cols-3">
               {attendanceOptions.map((option) => (
                 <RadioOption
                   key={option.value}
@@ -251,7 +252,7 @@ export function RsvpPlaceholder() {
                 <legend className="mb-2 text-sm font-semibold text-[#4a1212]">
                   Bạn dự phần nào?
                 </legend>
-                <div className="grid gap-2.5 sm:grid-cols-2">
+                <div className="grid gap-2.5 @2xl:grid-cols-2">
                   {visibleEventOptions.map((option) => (
                     <CheckboxOption
                       key={option.value}
@@ -355,7 +356,7 @@ export function RsvpPlaceholder() {
             </p>
           ) : null}
         </form>
-      </div>
+      </Reveal>
     </section>
   );
 }

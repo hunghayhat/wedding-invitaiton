@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Location } from "./Location";
+import { Reveal } from "./Reveal";
 import { WeddingInfo } from "./WeddingInfo";
 
 type SideFilter = "all" | "groom" | "bride";
@@ -18,7 +19,7 @@ export function WeddingFlow() {
   return (
     <>
       <section className="bg-[#fff7ef] px-4 py-12 text-[#4a1212] sm:px-6 sm:py-16">
-        <div className="mx-auto max-w-5xl">
+        <Reveal className="mx-auto max-w-5xl">
           <div className="mx-auto mb-8 max-w-3xl text-center">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#982723] sm:text-sm sm:tracking-[0.2em]">
               Lịch mời
@@ -50,7 +51,7 @@ export function WeddingFlow() {
           </div>
 
           <WeddingInfo selectedSide={selectedSide} />
-        </div>
+        </Reveal>
       </section>
 
       <Location selectedSide={selectedSide} />

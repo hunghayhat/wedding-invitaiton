@@ -1,105 +1,147 @@
 "use client";
 
-import { type TouchEvent, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import { Reveal } from "./Reveal";
 import { wedding } from "../data/wedding";
 
+const polaroidTilts = [
+  "-rotate-2",
+  "rotate-2",
+  "rotate-1",
+  "-rotate-1",
+  "rotate-[1.5deg]",
+];
+
 export function Gallery() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const touchStartX = useRef<number | null>(null);
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const photos = wedding.gallery;
-  const activePhoto = photos[activeIndex];
   const canSlide = photos.length > 1;
 
   function showPrevious() {
-    setActiveIndex((current) =>
-      current === 0 ? photos.length - 1 : current - 1,
-    );
+    setActiveIndex((current) => {
+      if (current === null) {
+        return current;
+      }
+
+      return current === 0 ? photos.length - 1 : current - 1;
+    });
   }
 
   function showNext() {
-    setActiveIndex((current) =>
-      current === photos.length - 1 ? 0 : current + 1,
-    );
+    setActiveIndex((current) => {
+      if (current === null) {
+        return current;
+      }
+
+      return current === photos.length - 1 ? 0 : current + 1;
+    });
   }
 
-  function handleTouchStart(event: TouchEvent<HTMLDivElement>) {
-    touchStartX.current = event.touches[0]?.clientX ?? null;
-  }
-
-  function handleTouchEnd(event: TouchEvent<HTMLDivElement>) {
-    const startX = touchStartX.current;
-    const endX = event.changedTouches[0]?.clientX;
-
-    touchStartX.current = null;
-
-    if (startX === null || endX === undefined) {
+  useEffect(() => {
+    if (activeIndex === null) {
       return;
     }
 
-    const distance = endX - startX;
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setActiveIndex(null);
+      }
 
-    if (Math.abs(distance) < 48) {
-      return;
+      if (event.key === "ArrowLeft") {
+        showPrevious();
+      }
+
+      if (event.key === "ArrowRight") {
+        showNext();
+      }
     }
 
-    if (distance > 0) {
-      showPrevious();
-      return;
-    }
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", handleKeyDown);
 
-    showNext();
-  }
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [activeIndex]);
 
-  if (!activePhoto) {
+  if (photos.length === 0) {
     return null;
   }
 
+  const activePhoto =
+    activeIndex === null ? null : (photos[activeIndex] ?? null);
+
   return (
-    <section className="bg-[#fff7e6] px-4 py-12 sm:px-6 sm:py-16">
-      <div className="mx-auto max-w-5xl">
-        <div className="mb-8 text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#9b1c1c] sm:text-sm sm:tracking-[0.2em]">
-            Album
-          </p>
-          <h2 className="mt-3 text-2xl font-semibold leading-tight text-[#4a1212] sm:text-3xl">
+    <section className="bg-[#fff7e6] px-4 py-14 sm:px-6 sm:py-20">
+      <Reveal className="mx-auto max-w-5xl">
+        <div className="mb-10 text-center">
+          <div className="flex items-center justify-center gap-3">
+            <span
+              aria-hidden="true"
+              className="h-px w-8 bg-gradient-to-r from-transparent to-[#d7a84f]/70 sm:w-12"
+            />
+            <p className="text-[0.7rem] uppercase tracking-[0.28em] text-[#982723]">
+              Album
+            </p>
+            <span
+              aria-hidden="true"
+              className="h-px w-8 bg-gradient-to-l from-transparent to-[#d7a84f]/70 sm:w-12"
+            />
+          </div>
+          <h2 className="font-display mt-4 text-2xl font-semibold leading-tight text-[#4a1212] sm:text-3xl">
             Những khoảnh khắc yêu thương
           </h2>
         </div>
 
-        <div className="mx-auto max-w-[520px]">
-          <div className="relative overflow-hidden border border-[#e1b85c] bg-white p-2 shadow-sm sm:p-3">
-            <div
-              className="relative aspect-[2/3] overflow-hidden bg-[#f9f0df]"
-              onTouchStart={handleTouchStart}
-              onTouchEnd={handleTouchEnd}
+        <div className="columns-2 gap-4 @2xl:columns-3 @4xl:gap-5">
+          {photos.map((photo, index) => (
+            <button
+              key={photo}
+              type="button"
+              onClick={() => setActiveIndex(index)}
+              className={`mb-4 block w-full break-inside-avoid rounded-sm bg-white p-2 pb-8 text-left shadow-[0_10px_24px_rgba(74,18,18,0.12)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_16px_32px_rgba(74,18,18,0.16)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#982723]/40 @2xl:mb-5 @2xl:p-2.5 @2xl:pb-9 ${polaroidTilts[index % polaroidTilts.length]}`}
             >
-              <div
-                className="flex h-full transition-transform duration-500 ease-out"
-                style={{ transform: `translateX(-${activeIndex * 100}%)` }}
-              >
-                {photos.map((photo, index) => (
-                  <div
-                    key={photo}
-                    className="relative h-full min-w-full overflow-hidden"
-                  >
-                    <img
-                      src={photo}
-                      alt=""
-                      aria-hidden="true"
-                      loading={index === 0 ? "eager" : "lazy"}
-                      className="absolute inset-0 h-full w-full scale-110 object-cover opacity-25 blur-2xl"
-                    />
-                    <div className="absolute inset-0 bg-[#fff7e6]/35" />
-                    <img
-                      src={photo}
-                      alt={`Ảnh cưới ${index + 1}`}
-                      loading={index === 0 ? "eager" : "lazy"}
-                      className="relative z-10 h-full w-full object-cover"
-                    />
-                  </div>
-                ))}
-              </div>
+              <img
+                src={photo}
+                alt={`Ảnh cưới ${index + 1}`}
+                loading={index === 0 ? "eager" : "lazy"}
+                className="aspect-[3/4] w-full object-cover"
+              />
+            </button>
+          ))}
+        </div>
+      </Reveal>
+
+      {activePhoto && activeIndex !== null ? (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm"
+          onClick={() => setActiveIndex(null)}
+        >
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label={`Ảnh cưới ${activeIndex + 1}`}
+            className="relative w-full max-w-sm"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="rounded-sm bg-white p-3 pb-10 shadow-2xl">
+              <img
+                src={activePhoto}
+                alt={`Ảnh cưới ${activeIndex + 1}`}
+                className="aspect-[3/4] w-full object-cover"
+              />
             </div>
+
+            <button
+              type="button"
+              onClick={() => setActiveIndex(null)}
+              aria-label="Đóng ảnh"
+              className="absolute -right-2 -top-3 flex size-9 items-center justify-center rounded-full bg-[#982723] text-xl leading-none text-white shadow-md"
+            >
+              ×
+            </button>
 
             {canSlide ? (
               <>
@@ -107,7 +149,7 @@ export function Gallery() {
                   type="button"
                   onClick={showPrevious}
                   aria-label="Xem ảnh trước"
-                  className="absolute left-4 top-1/2 flex size-10 -translate-y-1/2 items-center justify-center rounded-full bg-[#4a1212]/75 text-2xl leading-none text-[#fff7e6] transition hover:bg-[#4a1212] sm:left-5"
+                  className="absolute left-0 top-1/2 flex size-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[#4a1212]/85 text-2xl leading-none text-[#fff7e6]"
                 >
                   ‹
                 </button>
@@ -115,39 +157,18 @@ export function Gallery() {
                   type="button"
                   onClick={showNext}
                   aria-label="Xem ảnh tiếp theo"
-                  className="absolute right-4 top-1/2 flex size-10 -translate-y-1/2 items-center justify-center rounded-full bg-[#4a1212]/75 text-2xl leading-none text-[#fff7e6] transition hover:bg-[#4a1212] sm:right-5"
+                  className="absolute right-0 top-1/2 flex size-10 translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[#4a1212]/85 text-2xl leading-none text-[#fff7e6]"
                 >
                   ›
                 </button>
+                <p className="mt-4 text-center text-sm font-semibold text-[#fff7e6]/80">
+                  {activeIndex + 1} / {photos.length}
+                </p>
               </>
             ) : null}
           </div>
-
-          {canSlide ? (
-            <div className="mt-5 flex items-center justify-center gap-4">
-              <p className="min-w-12 text-center text-sm font-semibold tabular-nums text-[#6b4435]">
-                {activeIndex + 1} / {photos.length}
-              </p>
-              <div className="flex flex-wrap justify-center gap-2">
-                {photos.map((photo, index) => (
-                  <button
-                    key={photo}
-                    type="button"
-                    aria-label={`Xem ảnh cưới ${index + 1}`}
-                    aria-current={index === activeIndex}
-                    onClick={() => setActiveIndex(index)}
-                    className={`size-2.5 rounded-full transition ${
-                      index === activeIndex
-                        ? "bg-[#982723]"
-                        : "bg-[#d7a84f]/45"
-                    }`}
-                  />
-                ))}
-              </div>
-            </div>
-          ) : null}
         </div>
-      </div>
+      ) : null}
     </section>
   );
 }
