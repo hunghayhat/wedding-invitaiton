@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { Modal } from "./Modal";
 import { Reveal } from "./Reveal";
 import { wedding } from "../data/wedding";
 
@@ -178,21 +179,7 @@ export function Gift() {
       return;
     }
 
-    function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") {
-        setIsOpen(false);
-      }
-    }
-
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    document.addEventListener("keydown", handleKeyDown);
     closeButtonRef.current?.focus();
-
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      document.removeEventListener("keydown", handleKeyDown);
-    };
   }, [isOpen]);
 
   function closeModal() {
@@ -226,11 +213,11 @@ export function Gift() {
           <span className="relative flex h-52 w-64 items-end justify-center sm:h-64 sm:w-80">
             <Envelope
               gradientId="giftEnvelopeLeft"
-              className="absolute bottom-0 left-2 h-44 w-auto -rotate-[14deg] drop-shadow-[0_18px_28px_rgba(0,0,0,0.35)] transition-transform duration-300 group-hover:-translate-y-2 group-hover:-rotate-[18deg] sm:h-56"
+              className="absolute bottom-0 left-2 h-44 w-auto -rotate-[14deg] shadow-[0_18px_28px_rgba(0,0,0,0.35)] transition-transform duration-300 group-hover:-translate-y-2 group-hover:-rotate-[18deg] sm:h-56"
             />
             <Envelope
               gradientId="giftEnvelopeRight"
-              className="absolute bottom-0 right-2 h-44 w-auto rotate-[14deg] drop-shadow-[0_18px_28px_rgba(0,0,0,0.35)] transition-transform duration-300 group-hover:-translate-y-2 group-hover:rotate-[18deg] sm:h-56"
+              className="absolute bottom-0 right-2 h-44 w-auto rotate-[14deg] shadow-[0_18px_28px_rgba(0,0,0,0.35)] transition-transform duration-300 group-hover:-translate-y-2 group-hover:rotate-[18deg] sm:h-56"
             />
           </span>
           <span className="mt-6 block text-sm font-semibold tracking-[0.14em] text-[#e9c877]/85">
@@ -240,17 +227,8 @@ export function Gift() {
       </Reveal>
 
       {isOpen ? (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-black/60 p-4 backdrop-blur-sm"
-          onClick={closeModal}
-        >
-          <div
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="gift-modal-title"
-            onClick={(event) => event.stopPropagation()}
-            className="my-auto w-full max-w-lg overflow-hidden rounded-2xl bg-[#7a1416] shadow-2xl"
-          >
+        <Modal labelledBy="gift-modal-title" onClose={closeModal}>
+          <div className="overflow-hidden rounded-2xl bg-[#7a1416] shadow-2xl">
             <div className="relative bg-[#e6c88a] px-6 py-3.5">
               <h3
                 id="gift-modal-title"
@@ -275,7 +253,7 @@ export function Gift() {
               ))}
             </div>
           </div>
-        </div>
+        </Modal>
       ) : null}
     </section>
   );
