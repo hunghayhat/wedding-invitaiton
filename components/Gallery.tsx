@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Modal } from "./Modal";
 import { Reveal } from "./Reveal";
 import { wedding } from "../data/wedding";
 
@@ -43,10 +44,6 @@ export function Gallery() {
     }
 
     function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") {
-        setActiveIndex(null);
-      }
-
       if (event.key === "ArrowLeft") {
         showPrevious();
       }
@@ -56,14 +53,9 @@ export function Gallery() {
       }
     }
 
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
     document.addEventListener("keydown", handleKeyDown);
 
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      document.removeEventListener("keydown", handleKeyDown);
-    };
+    return () => document.removeEventListener("keydown", handleKeyDown);
   }, [activeIndex]);
 
   if (photos.length === 0) {
@@ -115,17 +107,11 @@ export function Gallery() {
       </Reveal>
 
       {activePhoto && activeIndex !== null ? (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm"
-          onClick={() => setActiveIndex(null)}
+        <Modal
+          label={`Ảnh cưới ${activeIndex + 1}`}
+          onClose={() => setActiveIndex(null)}
         >
-          <div
-            role="dialog"
-            aria-modal="true"
-            aria-label={`Ảnh cưới ${activeIndex + 1}`}
-            className="relative w-full max-w-sm"
-            onClick={(event) => event.stopPropagation()}
-          >
+          <div className="relative mx-auto w-full max-w-sm">
             <div className="rounded-sm bg-white p-3 pb-10 shadow-2xl">
               <img
                 src={activePhoto}
@@ -167,7 +153,7 @@ export function Gallery() {
               </>
             ) : null}
           </div>
-        </div>
+        </Modal>
       ) : null}
     </section>
   );
