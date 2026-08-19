@@ -1,5 +1,25 @@
 import type { Metadata } from "next";
+import { Great_Vibes, Lora, Nunito_Sans } from "next/font/google";
 import "./globals.css";
+
+const lora = Lora({
+  subsets: ["latin", "vietnamese"],
+  display: "swap",
+  variable: "--font-display",
+});
+
+const nunitoSans = Nunito_Sans({
+  subsets: ["latin", "vietnamese"],
+  display: "swap",
+  variable: "--font-body",
+});
+
+const greatVibes = Great_Vibes({
+  subsets: ["latin", "vietnamese"],
+  weight: ["400"],
+  display: "swap",
+  variable: "--font-script",
+});
 
 const siteUrl = new URL("https://wedding-invitation-ruddy-three.vercel.app");
 const title = "Thiệp cưới Minh Anh & Văn Tiến";
@@ -44,7 +64,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="vi">
+    <html
+      lang="vi"
+      className={`${lora.variable} ${nunitoSans.variable} ${greatVibes.variable}`}
+    >
       <body>{children}</body>
     </html>
   );

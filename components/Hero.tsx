@@ -6,86 +6,147 @@ type Person = {
   photo: string;
 };
 
-function DragonPattern({ className = "" }: { className?: string }) {
+function LatticePattern({
+  patternId,
+  color,
+  className = "",
+}: {
+  patternId: string;
+  color: string;
+  className?: string;
+}) {
   return (
-    <div
+    <svg
       aria-hidden="true"
-      className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`}
+      focusable="false"
+      className={`pointer-events-none absolute inset-0 h-full w-full ${className}`}
     >
-      <div className="flex -translate-y-10 flex-wrap gap-x-10 gap-y-1 text-8xl font-semibold leading-none text-[#d59a49]/45 sm:text-9xl">
-        {Array.from({ length: 18 }).map((_, index) => (
-          <span
-            key={index}
-            className={index % 2 === 0 ? "rotate-12" : "-rotate-12"}
-          >
-            {"\u9F8D"}
-          </span>
-        ))}
-      </div>
+      <defs>
+        <pattern
+          id={patternId}
+          width="44"
+          height="44"
+          patternUnits="userSpaceOnUse"
+        >
+          <path
+            d="M22 2 L42 22 L22 42 L2 22 Z"
+            fill="none"
+            stroke={color}
+            strokeWidth="1"
+          />
+          <circle cx="22" cy="22" r="2.5" fill={color} />
+          <circle cx="0" cy="0" r="1.5" fill={color} />
+          <circle cx="44" cy="0" r="1.5" fill={color} />
+          <circle cx="0" cy="44" r="1.5" fill={color} />
+          <circle cx="44" cy="44" r="1.5" fill={color} />
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill={`url(#${patternId})`} />
+    </svg>
+  );
+}
+
+function PortraitCircle({ person }: { person: Person }) {
+  return (
+    <div className="relative z-10 mx-auto aspect-square w-full max-w-[10.5rem] overflow-hidden rounded-full border-[6px] border-[#f7efe6] bg-[#8f2622] shadow-[0_18px_40px_rgba(94,23,20,0.28)] outline outline-2 outline-[#d59a49]/70 @2xl:max-w-[13rem] @2xl:border-[8px] @4xl:max-w-[16rem]">
+      <img
+        src={person.photo}
+        alt={person.name}
+        className="h-full w-full object-cover"
+      />
     </div>
   );
 }
 
-function PortraitCard({ person }: { person: Person }) {
+function PortraitCaption({ person }: { person: Person }) {
   return (
-    <article className="relative z-10 min-w-0 text-center">
-      <div className="mx-auto size-[clamp(8.75rem,34vw,18rem)] overflow-hidden rounded-full border-[8px] border-[#efe3d7] bg-[#8f2622] shadow-xl shadow-[#5e1714]/20 sm:border-[10px]">
-        <img
-          src={person.photo}
-          alt={person.name}
-          className="h-full w-full object-cover"
-        />
-      </div>
+    <div className="min-w-0 text-center">
       {person.role ? (
-        <p className="mt-6 text-sm font-medium text-[#6f5b50] sm:text-base">
+        <p className="text-xs uppercase tracking-[0.22em] text-[#8a6f5f] sm:text-sm">
           {person.role}
         </p>
       ) : null}
-      <h1
-        className={`font-display break-words text-3xl font-semibold leading-tight text-[#982723] sm:text-4xl lg:text-5xl ${
-          person.role ? "mt-1" : "mt-6"
-        }`}
-      >
+      <h1 className="font-script mt-2 break-words text-3xl font-bold leading-tight text-[#982723] @2xl:text-4xl @4xl:text-5xl">
         {person.name}
       </h1>
-    </article>
+    </div>
   );
 }
 
 export function Hero() {
   return (
-    <section className="overflow-hidden bg-[#efe3d7] text-[#982723]">
-      <div className="relative h-24 overflow-hidden bg-[#982723] sm:h-36">
-        <DragonPattern />
+    <section className="overflow-hidden bg-[#f7efe6] text-[#982723]">
+      <div className="relative overflow-hidden border-b-2 border-[#d59a49]/60 bg-[#982723] px-5 py-7 text-center text-[#fff7ef] sm:px-8 sm:py-9">
+        <LatticePattern
+          patternId="heroLatticeTop"
+          color="#e8bd76"
+          className="opacity-25"
+        />
+        <div className="relative mx-auto max-w-sm">
+          <p className="text-[0.7rem] uppercase tracking-[0.28em] text-[#e8bd76]">
+            {wedding.hero.kicker}
+          </p>
+          <div className="mx-auto my-4 flex w-24 items-center gap-2">
+            <span className="h-px flex-1 bg-[#e8bd76]/50" />
+            <span className="text-[0.6rem] text-[#e8bd76]">✦</span>
+            <span className="h-px flex-1 bg-[#e8bd76]/50" />
+          </div>
+          <p className="font-display text-2xl tracking-[0.12em] text-[#fff7ef] sm:text-3xl">
+            {wedding.hero.title}
+          </p>
+          <p className="mt-3 text-sm tabular-nums tracking-[0.2em] text-[#f7efe6]/80">
+            {wedding.hero.dateLabel}
+          </p>
+        </div>
+        <div className="absolute inset-x-0 bottom-1 h-px bg-[#e8bd76]/45" />
       </div>
 
-      <div className="relative overflow-hidden bg-[#efe3d7]">
-        <DragonPattern className="opacity-15" />
-        <div className="absolute inset-x-0 top-[34%] h-14 bg-[#982723] sm:top-[35%] sm:h-20" />
-        <div className="absolute inset-x-0 top-[34%] h-14 bg-[radial-gradient(circle_at_center,rgba(238,227,215,0.14),transparent_40%)] sm:top-[35%] sm:h-20" />
+      <div className="relative overflow-hidden">
+        <LatticePattern
+          patternId="heroLatticeBody"
+          color="#c8964a"
+          className="opacity-[0.14]"
+        />
 
-        <div className="relative mx-auto max-w-6xl px-4 pb-12 pt-10 sm:px-6 sm:pb-16 sm:pt-14 lg:pb-20">
-          <div className="relative grid grid-cols-2 items-start gap-4 sm:gap-10 lg:gap-16">
-            <PortraitCard person={wedding.people.groom} />
+        <div className="relative mx-auto max-w-6xl px-4 pb-12 pt-10 sm:px-6 sm:pb-16 sm:pt-12 lg:pb-20">
+          <div className="relative">
+            <div
+              aria-hidden="true"
+              className="absolute inset-x-[-50vw] top-1/2 h-12 -translate-y-1/2 bg-[#982723] sm:h-16"
+            >
+              <div className="absolute inset-x-0 top-[3px] h-px bg-[#e8bd76]/55" />
+              <div className="absolute inset-x-0 bottom-[3px] h-px bg-[#e8bd76]/55" />
+            </div>
+
+            <div className="relative grid grid-cols-2 gap-6 @2xl:gap-12 @4xl:gap-20">
+              <PortraitCircle person={wedding.people.groom} />
+              <PortraitCircle person={wedding.people.bride} />
+            </div>
 
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute left-1/2 top-[clamp(4.7rem,18vw,9.8rem)] z-20 -translate-x-1/2 -translate-y-1/2 text-6xl font-bold leading-none text-[#982723] sm:text-7xl lg:text-8xl"
-              style={{
-                textShadow:
-                  "2px 0 #fff7ef, -2px 0 #fff7ef, 0 2px #fff7ef, 0 -2px #fff7ef",
-              }}
+              className="absolute left-1/2 top-1/2 z-20 flex size-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-[#e8bd76] bg-[#982723] shadow-[0_10px_24px_rgba(94,23,20,0.35)] @2xl:size-16 @4xl:size-20"
             >
-              {"\u56CD"}
+              <span className="text-2xl font-bold leading-none text-[#f7efe6] @2xl:text-3xl @4xl:text-4xl">
+                {"\u56CD"}
+              </span>
             </div>
+          </div>
 
-            <PortraitCard person={wedding.people.bride} />
+          <div className="relative mt-6 grid grid-cols-2 gap-6 @2xl:mt-8 @2xl:gap-12 @4xl:gap-20">
+            <PortraitCaption person={wedding.people.groom} />
+            <PortraitCaption person={wedding.people.bride} />
           </div>
         </div>
       </div>
 
-      <div className="bg-[#982723] px-4 py-5 text-center text-[#fff7ef] sm:py-6">
-        <h2 className="font-display text-2xl font-semibold uppercase leading-tight sm:text-3xl">
+      <div className="relative border-t-2 border-[#d59a49]/60 bg-[#982723] px-4 py-5 text-center text-[#fff7ef] sm:py-6">
+        <LatticePattern
+          patternId="heroLatticeBottom"
+          color="#e8bd76"
+          className="opacity-20"
+        />
+        <h2 className="font-display relative text-2xl font-semibold uppercase leading-tight sm:text-3xl">
           Thông tin lễ cưới
         </h2>
       </div>
